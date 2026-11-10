@@ -1,0 +1,62 @@
+<div class="p-3">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Students
+      </mat-card-title>
+    </mat-card-header>
+    <mat-divider>
+    </mat-divider>
+    <mat-card-content>
+      <table matSort mat-table [dataSource]="dataSource" class="mat-shadow-2">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+          <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="programId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Program ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.programId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="photo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Student Photo </th>
+          <td mat-cell *matCellDef="let element"> {{element.photo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button (click)="studentPayments(element.code)">
+              Show Payments
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"
+                     showFirstLastButtons>
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

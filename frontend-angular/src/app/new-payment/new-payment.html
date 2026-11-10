@@ -1,0 +1,55 @@
+<div class="p-6 flex items-center justify-center bg-gray-50">
+  <mat-card class="w-full max-w-2xl p-5">
+    <mat-card-header class="pb-3">
+      <mat-card-title>
+        Add Payment Form
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-divider class="m-4"></mat-divider>
+
+    <mat-card-content [formGroup]="paymentForm" class="mt-8">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Payment date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="amount">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Payment Type</mat-label>
+        <mat-select formControlName="paymentType">
+          @for (paymentType of paymentTypes; track paymentType) {
+            <mat-option [value]="paymentType">{{paymentType}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Payment Document</mat-label>
+        <input matInput readonly formControlName="fileName" placeholder="No file chosen"/>
+        <button mat-icon-button matSuffix (click)="fileInput.click()" type="button">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <input
+          type="file"
+          #fileInput
+          hidden
+          (change)="onFileSelected($event)"
+          accept=".pdf" />
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button (click)="newPayment()" mat-raised-button color="primary">
+        Add Payment
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
